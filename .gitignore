@@ -1,0 +1,8 @@
+# Unused raw assets and mockups (~28 MB)
+assests/
+
+# OS and temporary files
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
