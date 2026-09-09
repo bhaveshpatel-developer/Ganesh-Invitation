@@ -336,17 +336,24 @@ p, h1, h2 { margin: 0; }
   margin-top: 14px;
 }
 .invite__scroll-btn {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 5.5vh;
+  bottom: 5.5svh;
+  margin: 0 auto;
+  width: max-content;
+  z-index: 6;
   background: transparent;
   border: none;
   padding: 8px 20px;
-  margin: 16px auto 0;
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  pointer-events: auto;
+  opacity: 0;
+  pointer-events: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.25s ease;
 }
 .invite__scroll-btn:hover,
 .invite__scroll-btn:focus-visible {
@@ -376,7 +383,7 @@ p, h1, h2 { margin: 0; }
 
 @media (max-height: 720px) {
   .invite {
-    top: 28%;
+    top: 26%;
     padding: 0 10%;
   }
   .invite__title {
@@ -388,7 +395,8 @@ p, h1, h2 { margin: 0; }
     line-height: 1.5;
   }
   .invite__scroll-btn {
-    margin-top: 10px;
+    bottom: 3.5vh;
+    bottom: 3.5svh;
   }
 }
 

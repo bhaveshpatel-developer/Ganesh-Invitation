@@ -86,9 +86,12 @@
         el.invite.style.opacity = i;
         el.invite.style.transform =
           'translate3d(0,' + (26 * (1 - easeOut(i))) + 'px,0) scale(' + (0.96 + 0.04 * i) + ')';
-        if (el.scrollBtn2) {
-          el.scrollBtn2.style.pointerEvents = (i > 0.4 && p < 0.95) ? 'auto' : 'none';
-        }
+      }
+      if (el.scrollBtn2) {
+        el.scrollBtn2.style.opacity = i;
+        el.scrollBtn2.style.transform =
+          'translate3d(0,' + (16 * (1 - easeOut(i))) + 'px,0)';
+        el.scrollBtn2.style.pointerEvents = (i > 0.4 && p < 0.95) ? 'auto' : 'none';
       }
     }
 
