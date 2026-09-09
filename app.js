@@ -20,7 +20,7 @@
   ['heroVideo', 'heroText', 'sec2', 'sec3', 'garlandL', 'garlandR',
    'bell1', 'bell2', 'bell3', 'bell4', 'diyaL', 'diyaR',
    'invite', 'card', 'cardRegion', 'mouse', 'bubble',
-   'petals', 'shareBtn', 'mapBtn'].forEach(function (id) {
+   'petals', 'shareBtn', 'mapBtn', 'scrollBtn'].forEach(function (id) {
     el[id] = document.getElementById(id);
   });
 
@@ -117,7 +117,11 @@
     /* --- Scene 01: hero copy fades on first scroll ---------- */
     if (el.heroText) {
       var y = window.scrollY || document.documentElement.scrollTop || 0;
-      el.heroText.style.opacity = Math.max(0, 1 - y / (vh * 0.45));
+      var op = Math.max(0, 1 - y / (vh * 0.45));
+      el.heroText.style.opacity = op;
+      if (el.scrollBtn) {
+        el.scrollBtn.style.pointerEvents = op < 0.05 ? 'none' : 'auto';
+      }
     }
   }
 
@@ -157,6 +161,17 @@
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
   }
 
+  function scrollToInvite() {
+    if (el.sec2) {
+      var rect = el.sec2.getBoundingClientRect();
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+      window.scrollTo({
+        top: rect.top + scrollTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+
   /* --- Boot ----------------------------------------------- */
   function start() {
     if (el.petals) el.petals.hidden = !CONFIG.showPetals;
@@ -165,6 +180,7 @@
       el.shareBtn.addEventListener('click', shareOnWhatsApp);
     }
     if (el.mapBtn) el.mapBtn.addEventListener('click', openMap);
+    if (el.scrollBtn) el.scrollBtn.addEventListener('click', scrollToInvite);
 
     document.addEventListener('scroll', tick, { passive: true, capture: true });
     window.addEventListener('resize', tick);

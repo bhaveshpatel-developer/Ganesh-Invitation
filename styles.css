@@ -13,13 +13,21 @@
   --shade: 233, 201, 173;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   background: var(--ground);
   -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
 }
-body { overflow-x: clip; }
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 
 a { color: #9a5a1c; text-decoration: none; }
 a:hover { color: #6d3c10; }
@@ -68,6 +76,7 @@ p, h1, h2 { margin: 0; }
   height: 100svh;
   overflow: hidden;
   background: transparent;
+  touch-action: pan-y;
 }
 .hero__video {
   position: absolute;
@@ -75,6 +84,7 @@ p, h1, h2 { margin: 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 .hero__fallback {
   position: absolute;
@@ -90,6 +100,7 @@ p, h1, h2 { margin: 0; }
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 52%;
+  pointer-events: none;
   /* Fully opaque at the base so the hero's bottom edge *is* the ground,
      leaving nothing to step against where the next scene begins. */
   background: linear-gradient(to top,
@@ -104,6 +115,7 @@ p, h1, h2 { margin: 0; }
   bottom: 6.5svh;
   padding: 0 28px;
   text-align: center;
+  pointer-events: none;
 }
 .hero__mantra {
   font-family: Mukta, sans-serif;
@@ -127,7 +139,29 @@ p, h1, h2 { margin: 0; }
   background: #c99a4e;
   margin: 18px auto 0;
 }
+.hero__scroll-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 20px;
+  margin: 0 auto;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.hero__scroll-btn:hover,
+.hero__scroll-btn:focus-visible {
+  opacity: 0.8;
+  transform: translateY(3px);
+}
+.hero__scroll-btn:focus {
+  outline: none;
+}
 .hero__cue {
+  display: block;
   font-family: Mukta, sans-serif;
   font-weight: 400;
   font-size: 13px;
@@ -137,6 +171,7 @@ p, h1, h2 { margin: 0; }
   margin-top: 20px;
 }
 .hero__arrow {
+  display: block;
   font-family: Mukta, sans-serif;
   font-size: 22px;
   color: #b5813a;
