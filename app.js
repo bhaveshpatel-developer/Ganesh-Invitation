@@ -182,7 +182,7 @@
       activeScrollAnim = null;
     }
 
-    duration = duration || 1300;
+    duration = duration || 2400;
     var startY = window.pageYOffset || document.documentElement.scrollTop || 0;
     var distance = targetY - startY;
     if (Math.abs(distance) < 4) return;
@@ -200,8 +200,9 @@
       window.addEventListener(e, stopAnim, { passive: true, once: true });
     });
 
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    /* Gentle sine easing: smooth onset, calm uniform speed, soft arrival without speed spikes */
+    function easeInOutSine(t) {
+      return -(Math.cos(Math.PI * t) - 1) / 2;
     }
 
     function step(timestamp) {
@@ -209,7 +210,7 @@
       if (!startTime) startTime = timestamp;
       var elapsed = timestamp - startTime;
       var progress = Math.min(elapsed / duration, 1);
-      var eased = easeInOutCubic(progress);
+      var eased = easeInOutSine(progress);
 
       window.scrollTo(0, startY + distance * eased);
 
@@ -227,7 +228,7 @@
     if (el.sec2) {
       var rect = el.sec2.getBoundingClientRect();
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      smoothScrollTo(rect.top + scrollTop, 1300);
+      smoothScrollTo(rect.top + scrollTop, 2400);
     }
   }
 
@@ -235,7 +236,7 @@
     if (el.sec3) {
       var rect = el.sec3.getBoundingClientRect();
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      smoothScrollTo(rect.top + scrollTop, 1300);
+      smoothScrollTo(rect.top + scrollTop, 2400);
     }
   }
 
