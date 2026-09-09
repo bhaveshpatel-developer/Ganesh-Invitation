@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "configurations": [
+    {
+      "name": "invitation",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["devserver.py", "8765"],
+      "port": 8765
+    }
+  ]
+}
