@@ -22,6 +22,8 @@ html, body {
   padding: 0;
   background: var(--ground);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   touch-action: pan-y;
 }
 body {
@@ -297,6 +299,10 @@ p, h1, h2 { margin: 0; }
   text-align: center;
   opacity: 0;
   will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 .invite__salutation {
   font-family: Mukta, sans-serif;
@@ -433,6 +439,10 @@ p, h1, h2 { margin: 0; }
   transform-origin: top center;
   opacity: 0;
   will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 .card__head { text-align: center; }
 .card__eyebrow {

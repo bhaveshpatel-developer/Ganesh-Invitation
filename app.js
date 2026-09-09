@@ -81,16 +81,19 @@
         el.diyaR.style.transform = 'translate3d(' + (130 * (1 - d)) + '%,0,0) scaleX(-1)';
       }
 
-      var i = seg(p, 0.44, 0.70);
+      var fadeIn = seg(p, 0.18, 0.50);
+      var fadeOut = 1 - seg(p, 0.90, 1.0);
+      var i = fadeIn * fadeOut;
+
       if (el.invite) {
         el.invite.style.opacity = i;
         el.invite.style.transform =
-          'translate3d(0,' + (26 * (1 - easeOut(i))) + 'px,0) scale(' + (0.96 + 0.04 * i) + ')';
+          'translate3d(0,' + (24 * (1 - easeOut(fadeIn))) + 'px,0)';
       }
       if (el.scrollBtn2) {
         el.scrollBtn2.style.opacity = i;
         el.scrollBtn2.style.transform =
-          'translate3d(0,' + (16 * (1 - easeOut(i))) + 'px,0)';
+          'translate3d(0,' + (16 * (1 - easeOut(fadeIn))) + 'px,0)';
         el.scrollBtn2.style.pointerEvents = (i > 0.4 && p < 0.95) ? 'auto' : 'none';
       }
     }
@@ -99,24 +102,28 @@
     if (el.sec3) {
       var p3 = sceneProgress(el.sec3, vh);
 
-      var c = seg(p3, 0.10, 0.42);
+      var c = seg(p3, 0.08, 0.42);
       if (el.card) {
-        /* Shrink the card if it would overflow its region on short screens. */
         var s = 1;
-        if (el.cardRegion && el.card.scrollHeight) {
-          s = Math.max(0.7, Math.min(1, (el.cardRegion.clientHeight - 10) / el.card.scrollHeight));
+        if (el.cardRegion && el.card.scrollHeight && el.cardRegion.clientHeight < el.card.scrollHeight) {
+          s = Math.max(0.75, (el.cardRegion.clientHeight - 8) / el.card.scrollHeight);
         }
         el.card.style.opacity = c;
-        el.card.style.transform =
-          'translate3d(0,' + (30 * (1 - easeOut(c))) + 'px,0) scale(' + s + ')';
+        if (s < 0.99) {
+          el.card.style.transform =
+            'translate3d(0,' + (26 * (1 - easeOut(c))) + 'px,0) scale(' + s.toFixed(3) + ')';
+        } else {
+          el.card.style.transform =
+            'translate3d(0,' + (26 * (1 - easeOut(c))) + 'px,0)';
+        }
       }
 
-      var m = easeOut(seg(p3, 0.22, 0.58));
+      var m = easeOut(seg(p3, 0.14, 0.46));
       if (el.mouse) {
         el.mouse.style.transform = 'translate3d(' + (135 * (1 - m)) + '%,0,0)';
       }
       if (el.bubble) {
-        el.bubble.style.opacity = seg(p3, 0.58, 0.74);
+        el.bubble.style.opacity = seg(p3, 0.22, 0.50);
       }
     }
 
