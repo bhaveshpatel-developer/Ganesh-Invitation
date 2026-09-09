@@ -335,6 +335,62 @@ p, h1, h2 { margin: 0; }
   color: #8f5a2a;
   margin-top: 14px;
 }
+.invite__scroll-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 20px;
+  margin: 16px auto 0;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.invite__scroll-btn:hover,
+.invite__scroll-btn:focus-visible {
+  opacity: 0.8;
+  transform: translateY(3px);
+}
+.invite__scroll-btn:focus {
+  outline: none;
+}
+.invite__cue {
+  display: block;
+  font-family: Mukta, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #8a6647;
+}
+.invite__arrow {
+  display: block;
+  font-family: Mukta, sans-serif;
+  font-size: 22px;
+  color: #b5813a;
+  margin-top: 2px;
+  animation: hintDown 1.8s ease-in-out infinite;
+}
+
+@media (max-height: 720px) {
+  .invite {
+    top: 28%;
+    padding: 0 10%;
+  }
+  .invite__title {
+    font-size: 32px;
+  }
+  .invite__body {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .invite__scroll-btn {
+    margin-top: 10px;
+  }
+}
 
 /* ===========================================================
    03 — Details
@@ -561,6 +617,7 @@ p, h1, h2 { margin: 0; }
    loops (swinging, bobbing, falling petals, glows) are stilled. */
 @media (prefers-reduced-motion: reduce) {
   .hero__arrow,
+  .invite__arrow,
   .spark,
   .bell__swing,
   .petal,

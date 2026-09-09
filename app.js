@@ -20,7 +20,7 @@
   ['heroVideo', 'heroText', 'sec2', 'sec3', 'garlandL', 'garlandR',
    'bell1', 'bell2', 'bell3', 'bell4', 'diyaL', 'diyaR',
    'invite', 'card', 'cardRegion', 'mouse', 'bubble',
-   'petals', 'shareBtn', 'mapBtn', 'scrollBtn'].forEach(function (id) {
+   'petals', 'shareBtn', 'mapBtn', 'scrollBtn', 'scrollBtn2'].forEach(function (id) {
     el[id] = document.getElementById(id);
   });
 
@@ -86,6 +86,9 @@
         el.invite.style.opacity = i;
         el.invite.style.transform =
           'translate3d(0,' + (26 * (1 - easeOut(i))) + 'px,0) scale(' + (0.96 + 0.04 * i) + ')';
+        if (el.scrollBtn2) {
+          el.scrollBtn2.style.pointerEvents = (i > 0.4 && p < 0.95) ? 'auto' : 'none';
+        }
       }
     }
 
@@ -172,6 +175,17 @@
     }
   }
 
+  function scrollToDetails() {
+    if (el.sec3) {
+      var rect = el.sec3.getBoundingClientRect();
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+      window.scrollTo({
+        top: rect.top + scrollTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+
   /* --- Boot ----------------------------------------------- */
   function start() {
     if (el.petals) el.petals.hidden = !CONFIG.showPetals;
@@ -181,6 +195,7 @@
     }
     if (el.mapBtn) el.mapBtn.addEventListener('click', openMap);
     if (el.scrollBtn) el.scrollBtn.addEventListener('click', scrollToInvite);
+    if (el.scrollBtn2) el.scrollBtn2.addEventListener('click', scrollToDetails);
 
     document.addEventListener('scroll', tick, { passive: true, capture: true });
     window.addEventListener('resize', tick);
