@@ -13,9 +13,6 @@
   --shade: 233, 201, 173;
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
 html, body {
   margin: 0;

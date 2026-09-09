@@ -174,14 +174,60 @@
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
   }
 
+  var activeScrollAnim = null;
+
+  function smoothScrollTo(targetY, duration) {
+    if (activeScrollAnim) {
+      cancelAnimationFrame(activeScrollAnim);
+      activeScrollAnim = null;
+    }
+
+    duration = duration || 1300;
+    var startY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var distance = targetY - startY;
+    if (Math.abs(distance) < 4) return;
+
+    var startTime = null;
+    var cancelled = false;
+
+    function stopAnim() {
+      cancelled = true;
+      ['wheel', 'touchstart'].forEach(function (e) {
+        window.removeEventListener(e, stopAnim);
+      });
+    }
+    ['wheel', 'touchstart'].forEach(function (e) {
+      window.addEventListener(e, stopAnim, { passive: true, once: true });
+    });
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(timestamp) {
+      if (cancelled) return;
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = easeInOutCubic(progress);
+
+      window.scrollTo(0, startY + distance * eased);
+
+      if (progress < 1) {
+        activeScrollAnim = requestAnimationFrame(step);
+      } else {
+        stopAnim();
+      }
+    }
+
+    activeScrollAnim = requestAnimationFrame(step);
+  }
+
   function scrollToInvite() {
     if (el.sec2) {
       var rect = el.sec2.getBoundingClientRect();
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      window.scrollTo({
-        top: rect.top + scrollTop,
-        behavior: 'smooth'
-      });
+      smoothScrollTo(rect.top + scrollTop, 1300);
     }
   }
 
@@ -189,10 +235,7 @@
     if (el.sec3) {
       var rect = el.sec3.getBoundingClientRect();
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-      window.scrollTo({
-        top: rect.top + scrollTop,
-        behavior: 'smooth'
-      });
+      smoothScrollTo(rect.top + scrollTop, 1300);
     }
   }
 
