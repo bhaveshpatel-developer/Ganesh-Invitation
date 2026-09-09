@@ -107,6 +107,63 @@ p, h1, h2 { margin: 0; }
     rgba(251, 234, 219, .72) 42%,
     rgba(251, 234, 219, 0));
 }
+/* --- Floating sound toggle (persists across all scenes/pages) */
+.sound-btn,
+.hero__sound-btn {
+  position: fixed;
+  z-index: 1000;
+  top: 18px;
+  top: max(18px, calc(18px + env(safe-area-inset-top, 0px)));
+  right: 18px;
+  right: max(18px, calc(50% - 270px + 18px));
+  right: max(calc(18px + env(safe-area-inset-right, 0px)), calc(50% - 270px + 18px));
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid rgba(143, 79, 22, .45);
+  border-radius: 9999px;
+  background: rgba(251, 234, 219, .88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(120, 70, 30, .14);
+  color: #8f4f16;
+  font-family: Mukta, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  pointer-events: auto;
+}
+.sound-btn:hover,
+.sound-btn:focus-visible,
+.hero__sound-btn:hover,
+.hero__sound-btn:focus-visible {
+  background: rgba(255, 245, 235, .98);
+  border-color: rgba(143, 79, 22, .75);
+  box-shadow: 0 6px 20px rgba(120, 70, 30, .22);
+  transform: translateY(-1px);
+}
+.sound-btn:active,
+.hero__sound-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(120, 70, 30, .15);
+}
+.sound-btn:focus {
+  outline: none;
+}
+.sound-btn__icon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.sound-btn__label {
+  display: inline-block;
+  letter-spacing: .02em;
+}
 .hero__text {
   position: absolute;
   left: 0; right: 0;
@@ -182,8 +239,8 @@ p, h1, h2 { margin: 0; }
    Scroll scenes (sticky stages)
    =========================================================== */
 .scene { position: relative; }
-.scene--invite  { height: 220vh; height: 220svh; }
-.scene--details { height: 200vh; height: 200svh; }
+.scene--invite  { height: 180vh; height: 180svh; }
+.scene--details { height: 180vh; height: 180svh; }
 
 .scene__stage {
   position: sticky;
@@ -194,6 +251,7 @@ p, h1, h2 { margin: 0; }
 }
 .stage--invite {
   background: transparent;
+  will-change: opacity;
 }
 .stage--details {
   display: flex;
@@ -237,7 +295,7 @@ p, h1, h2 { margin: 0; }
      split at the midline never cuts through a flower. */
   width: 55%;
   overflow: hidden;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 .garland img {
   display: block;
@@ -253,7 +311,7 @@ p, h1, h2 { margin: 0; }
   position: absolute;
   top: 0;
   transform-origin: 50% 0;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 .bell__swing {
   width: 100%;
@@ -282,7 +340,7 @@ p, h1, h2 { margin: 0; }
   bottom: -1%;
   width: 36%;
   object-fit: contain;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 .diya--left  { left: -6%;  transform: translate3d(-130%, 0, 0); }
 .diya--right { right: -6%; transform: translate3d(130%, 0, 0) scaleX(-1); }
@@ -555,7 +613,7 @@ p, h1, h2 { margin: 0; }
   width: min(54%, 186px);
   z-index: 5;
   opacity: 0;
-  will-change: opacity;
+  will-change: opacity, transform;
 }
 .bubble__box {
   background: #fffaf1;

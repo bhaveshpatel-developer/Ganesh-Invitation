@@ -32,12 +32,22 @@
 
 <body>
 
+  <!-- Floating sound toggle (persists across all pages/scenes) -->
+  <button id="soundBtn" type="button" class="sound-btn" aria-label="Turn sound off" aria-pressed="true">
+    <svg class="sound-btn__icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+    </svg>
+    <span class="sound-btn__label">Sound on</span>
+  </button>
+
   <div class="frame">
 
     <!-- 01 Hero -->
     <section class="hero" aria-label="Ganpati Bappa Morya">
       <video id="heroVideo" class="hero__video" poster="assets/hero-poster.jpg"
-        autoplay loop muted playsinline preload="auto" aria-hidden="true">
+        autoplay loop playsinline preload="auto" aria-hidden="true">
         <source src="uploads/Mouse_looking_at_rotating_Ganpati_202609051306.mp4" type="video/mp4">
         <!-- Fallback poster image & message if video element cannot play -->
         <img src="assets/hero-poster.jpg" alt="Ganpati Bappa Morya" class="hero__video">
@@ -57,7 +67,7 @@
 
     <!-- 02 Invitation -->
     <section id="sec2" class="scene scene--invite">
-      <div class="scene__stage stage--invite">
+      <div id="stage2" class="scene__stage stage--invite">
         <span class="spark spark--1" aria-hidden="true"></span>
         <span class="spark spark--2" aria-hidden="true"></span>
         <span class="spark spark--3" aria-hidden="true"></span>
@@ -114,7 +124,7 @@
 
     <!-- 03 Details -->
     <section id="sec3" class="scene scene--details">
-      <div class="scene__stage stage--details">
+      <div id="stage3" class="scene__stage stage--details">
 
         <div id="petals" class="petals" aria-hidden="true">
           <span class="petal petal--1"></span>
